@@ -328,29 +328,47 @@
     }
 
     /* Floating Back Button - Top Left Corner */
+    /* Floating Back Button – Transparent, Edge Overlay */
     .back-button {
       position: fixed;
-      top: 10px;
-      left: 10px;
-      background: linear-gradient(135deg, #71347B 0%, #8b4689 100%);
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 20px;
-      font-size: 10px;
+      top: 8px;
+      left: 12px;
+
+      background: rgba(113, 52, 123, 0.15);
+      color: rgba(113, 52, 123, 0.6);
+
+      border: 1px solid rgba(113, 52, 123, 0.25);
+      padding: 8px 16px;
+      border-radius: 999px;
+
+      font-size: 11px;
       font-weight: 600;
+      letter-spacing: 0.3px;
+
       cursor: pointer;
-      box-shadow: 0 4px 16px rgba(113, 52, 123, 0.4);
-      transition: all 0.3s ease;
-      z-index: 1000;
+      z-index: 5000;
+
+      backdrop-filter: blur(6px);
+      box-shadow: none;
+
+      opacity: 0.35;
+      transition:
+        opacity 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+
       display: none;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
     }
 
     .back-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba(113, 52, 123, 0.5);
+      opacity: 1;
+      background: linear-gradient(135deg, #71347B 0%, #8b4689 100%);
+      color: #ffffff;
+      box-shadow: 0 6px 18px rgba(113, 52, 123, 0.45);
+      transform: translateY(-1px);
     }
 
     /* Floating Input Panel - Top Left Corner */
@@ -538,7 +556,7 @@
       animation: fadeIn 0.3s ease;
     }
 
-    .success-message.visible {
+    .success-message.invisible {
       display: block;
     }
 
@@ -582,7 +600,60 @@
         min-width: auto;
       }
     }
-  </style>
+  
+    /* Floating Back Button – Arrow Expand on Hover */
+    .back-button {
+      position: fixed;
+      top: 8px;
+      left: 10px;
+      display: none;
+      align-items: center;
+      gap: 10px;
+
+      background: rgba(113, 52, 123, 0.12);
+      color: #71347B;
+      border: 1px solid rgba(113, 52, 123, 0.25);
+
+      padding: 8px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+
+      font-size: 11px;
+      font-weight: 600;
+      z-index: 5000;
+
+      backdrop-filter: blur(6px);
+      opacity: 0.4;
+      transition: all 0.3s ease;
+    }
+
+    .back-button .back-label {
+      max-width: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+      opacity: 1;
+      padding: 8px 18px;
+      background: linear-gradient(135deg, #71347B 0%, #8b4689 100%);
+      color: #ffffff;
+      box-shadow: 0 6px 18px rgba(113, 52, 123, 0.45);
+    }
+
+    .back-button:hover .back-label {
+      max-width: 160px;
+      opacity: 1;
+    }
+
+    .back-arrow {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+</style>
 </head>
 <body>
   <!-- Header (only shown in template selection mode) -->
@@ -617,7 +688,8 @@
 
   <!-- Floating Back Button (only shown in report mode) -->
   <button class="back-button" id="backButton" onclick="backToTemplates()">
-    ← Back to Templates
+    <span class="back-arrow"><<</span>
+    <span class="back-label">Back to Templates</span>
   </button>
 
   <!-- Floating Input Panel (only shown in report mode) -->
